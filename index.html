@@ -10,6 +10,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
 </head>
 <body>
 <h1>Load file</h1>
@@ -24,7 +25,7 @@
             <input type="submit" id="uploadsubmit" value="Upload" class="btn btn-primary"/>
         </div>
         <div class="progress">
-            <div class="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div id="targetlayer"></div>
 
@@ -41,10 +42,14 @@
                 $(this).ajaxSubmit({
                     target: "#targetlayer",
                     beforeSubmit: function () {
-                        $('.progressbar').width(percentComplete+'%')
-                        $('.progressbar').html('<div id="pregress-status">'+percentComplete+' %</div>')
+                        $('.progress-bar').width('0%')
 
 
+
+                    },
+                    uploadProgress: function(event, position, total, percentComplete){
+                        $(".progress-bar").width(percentComplete+'%')
+                        $(".progress-bar").html("<div id='progress-status'>"+percentComplete+' %</div>')
                     },
                     success: function () {
                         $('#loader-icon').hide()
