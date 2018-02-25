@@ -2,15 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>File upload progress bar</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <!-- Optional IE8 Support -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <h1>Load file</h1>
@@ -22,7 +21,7 @@
             <input type="file" name="uploadfile" id="uploadfile"/>
         </div>
         <div class="form-group">
-            <input type="submit" id="uploadsubmit" value="Upload" class="btn btn-primary" />
+            <input type="submit" id="uploadsubmit" value="Upload" class="btn btn-primary"/>
         </div>
         <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -33,11 +32,17 @@
     <div id="loader-icon" style="display:none"><img src="loader.gif"/></div>
 
 </div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript" src="disable-upload-btn.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#uploadform').submit(function (e) {
-            if($('#uploadfile').val()){
+            if ($('#uploadfile').val()) {
                 e.preventDefault()
                 $('#loader-icon').show()
                 $(this).ajaxSubmit({
@@ -46,11 +51,10 @@
                         $('.progress-bar').width('0%')
 
 
-
                     },
-                    uploadProgress: function(event, position, total, percentComplete){
-                        $(".progress-bar").width(percentComplete+'%')
-                        $(".progress-bar").html("<div id='progress-status'>"+percentComplete+' %</div>')
+                    uploadProgress: function (event, position, total, percentComplete) {
+                        $(".progress-bar").width(percentComplete + '%')
+                        $(".progress-bar").html("<div id='progress-status'>" + percentComplete + ' %</div>')
                     },
                     success: function () {
                         $('#loader-icon').hide()

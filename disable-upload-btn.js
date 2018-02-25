@@ -1,8 +1,8 @@
-$("input[type=submit]").attr('disabled','disabled');
+$("input[type=submit]").attr('disabled', 'disabled');
 $(document).ready(
-    function(){
+    function () {
         $('input:file').change(
-            function(){
+            function () {
                 if ($(this).val()) {
                     $('input:submit').removeAttr('disabled');
                 }
