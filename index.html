@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>File upload progress bar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Load file</h1>
+
+<div>
+
+    <form id="uploadform" method="post" action="upload.php">
+        <div class="form-group">
+            <input type="file" name="uploadfile" id="uploadfile"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="uploadsubmit" value="Upload" class="btn btn-primary"/>
+        </div>
+        <div class="progress">
+            <div class="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div id="targetlayer"></div>
+
+    </form>
+    <div id="loader-icon" style="display:none"><img src="loader.gif"/></div>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $('#uploadform').submit(function (e) {
+            if($('#uploadfile').val()){
+                e.preventDefault()
+                $('#loader-icon').show()
+                $(this).ajaxSubmit({
+                    target: "#targetlayer",
+                    beforeSubmit: function () {
+                        $('.progressbar').width(percentComplete+'%')
+                        $('.progressbar').html('<div id="pregress-status">'+percentComplete+' %</div>')
+
+
+                    },
+                    success: function () {
+                        $('#loader-icon').hide()
+
+                    },
+                    resetForm: true
+                })
+                return false
+            }
+
+        })
+    })
+</script>
+
+
+</body>
+</html>
